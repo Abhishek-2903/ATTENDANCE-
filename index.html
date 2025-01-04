@@ -1,206 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MechPhy - Attendance System</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #1e1e2f;
-      color: #e0e0f8;
-    }
-    .container {
-      text-align: center;
-      width: 350px;
-      padding: 20px;
-      background: #2a2a3d;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      margin: 20px;
-    }
-    .quote-box {
-      font-style: italic;
-      color: #90caf9;
-      margin-bottom: 20px;
-      font-size: 1.1em;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      width: 100%;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    input {
-      width: calc(100% - 22px);
-      padding: 10px;
-      margin: 5px 0;
-      border: 1px solid #444;
-      border-radius: 5px;
-      background-color: #333;
-      color: #e0e0f8;
-    }
-    h2 {
-      color: #90caf9;
-      margin-top: 0;
-    }
-    .hidden {
-      display: none;
-    }
-    #status {
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-    .success {
-      background-color: rgba(40, 167, 69, 0.2);
-      color: #98fb98;
-    }
-    .error {
-      background-color: rgba(220, 53, 69, 0.2);
-      color: #ff6b6b;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter From the Heart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Indie+Flower&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Indie Flower', cursive;
+            background: #f9f3f3;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .letter-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            position: relative;
+            transform: rotate(-1deg);
+            background-image: linear-gradient(#fff 1.1rem, #ccc 1.2rem);
+            background-size: 100% 1.2rem;
+            animation: slideIn 1s ease;
+            margin: 20px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(20px) rotate(-1deg); opacity: 0; }
+            to { transform: translateY(0) rotate(-1deg); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #ff8fab;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .letter-content {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #222;
+            margin: 20px 0;
+            padding: 0 20px;
+        }
+
+        .memory-box {
+            background: rgba(255, 243, 243, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #ffb3c6;
+        }
+
+        .doodle {
+            font-size: 1.8rem;
+            margin: 15px 0;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            text-align: right;
+            margin-top: 40px;
+            color: #ff8fab;
+        }
+
+        .floating-item {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: float 8s linear infinite;
+            z-index: -1;
+        }
+
+        .response-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .response-section.visible {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.2rem;
+            padding: 10px;
+            border: 2px solid #ffb3c6;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            resize: vertical;
+            color: #222;
+        }
+
+        button {
+            background: #ff8fab;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff7096;
+            transform: translateY(-2px);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(-50px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100vh) translateX(50px) rotate(359deg);
+                opacity: 0;
+            }
+        }
+
+        .tape {
+            position: absolute;
+            width: 100px;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.4);
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            opacity: 0.5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .loading {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .letter-container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .letter-content {
+                font-size: 1.2rem;
+                padding: 0 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="letter-container">
+        <div class="tape"></div>
+        <h1>Dear Iram... 💌</h1>
+        <div class="letter-content">
+            <p>Hey there! ✨</p>
+            
+            <p>Some feelings are just too special to keep inside, and after these beautiful two years of friendship, I wanted to share something with you. You've become someone very special to me, and I want to express this in the most respectful way possible.</p>
 
-<div class="container">
-  <div id="quote-box" class="quote-box">"TOUCH THE SKY WITH GLORY" </div>
+            <div class="memory-box">
+                <p>Our journey has been nothing short of magical - from those first conversations on Instagram to sharing moments on WhatsApp and Snapchat. Each platform brought us closer, and every conversation made our friendship more beautiful. 🌟</p>
+            </div>
 
-  <div id="login-screen">
-    <h2>Mechphy</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-  </div>
+            <div class="doodle">🦋</div>
 
-  <div id="main-screen" class="hidden">
-    <h2>Ready for Duty</h2>
-    <button onclick="checkIn()">Check In</button>
-    <button onclick="checkOut()">Check Out</button>
-    <p id="status"></p>
-  </div>
-</div>
+            <p>Your friendly nature, the way you see the world with such innocence, and how you bring smiles to those around you - these little things make you truly special, Iram. I've grown to love these qualities about you, always maintaining the utmost respect and understanding of our friendship's boundaries.</p>
 
-<script>
-  // Your Google Apps Script Web URL
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz-092hVvZioYGaVsqH9hGUFiaj2k1n07pIvZSh6RPcep98FRQ5EGKXgetCdeVuWLY/exec';
+            <p>I understand and completely respect that your heart belongs to someone else. But I wanted you to know that knowing you has made my world a bit brighter. The love I feel is pure and respectful - it's about appreciating who you are as a person, your kindness, and your beautiful soul.</p>
 
-  const users = [
-    { username: "ABHISHEK SINGH", password: "1234" },
-    { username: "ABHISHEK DUBEY", password: "1234" },
-    { username: "HARSHIT", password: "1234" },
-    { username: "NIKHIL", password: "1234" },
-    { username: "SAKSHAM", password: "1234" },
-    { username: "user", password: "1234" }
-  ];
+            <div class="doodle">✨</div>
 
-  let currentUser = '';
+            <p>I won't pretend it doesn't hurt, knowing that my feelings will remain just feelings. But I wanted to share them with you because they're real and true. You've touched my life in ways you may never know. Perhaps some feelings aren't meant to find their way to reality, but they're beautiful just the same.</p>
 
-  function showStatus(message, isError = false) {
-    const status = document.getElementById("status");
-    status.textContent = message;
-    status.className = isError ? 'error' : 'success';
-  }
+            <p>Whatever path life takes us on, I want you to know that meeting you, even if just online, has been one of the most beautiful chapters of my story. I'll carry the warmth of our conversations and the joy of our friendship in my heart.</p>
 
-  function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const user = users.find(user => user.username === username && user.password === password);
+            <div class="signature">
+                With love and respect,<br>
+                Abhishek 🌸
+            </div>
 
-    if (user) {
-      currentUser = username;
-      document.getElementById("login-screen").classList.add("hidden");
-      document.getElementById("main-screen").classList.remove("hidden");
-      showStatus(`Welcome ${username}!`);
-    } else {
-      showStatus("Invalid credentials", true);
-    }
-  }
+            <button onclick="showResponseSection()" style="display: block; margin: 30px auto;">Click to Reply</button>
 
-  async function sendDataToSheet(details) {
-    try {
-      const response = await fetch(SCRIPT_URL, {
-        redirect: 'follow',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain',
-        },
-        body: JSON.stringify(details)
-      });
+            <div class="response-section" id="responseSection">
+                <p>Your response will be sent to Abhishek:</p>
+                <textarea placeholder="Write your thoughts here..." id="responseText"></textarea>
+                <button onclick="sendResponse()" id="sendButton">Send Response</button>
+                <span class="loading" id="loadingIndicator" style="display: none;">Sending...</span>
+            </div>
+        </div>
+    </div>
 
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error("Error:", error);
-      throw error;
-    }
-  }
+    <script>
+        (function() {
+            emailjs.init("lVft5fYMSTAQGz853"); // Replace with your EmailJS public key
+        })();
 
-  async function checkIn() {
-    try {
-      const position = await getCurrentPosition();
-      const details = {
-        username: currentUser,
-        type: 'check-in',
-        latitude: position.coords.latitude.toFixed(5),
-        longitude: position.coords.longitude.toFixed(5),
-        timestamp: new Date().toLocaleString()
-      };
+        window.onload = function() {
+            localStorage.setItem('letterViewed', 'true');
+        };
 
-      await sendDataToSheet(details);
-      showStatus(`✓ Checked In successfully at ${new Date().toLocaleTimeString()}`);
-    } catch (error) {
-      showStatus(error.message, true);
-    }
-  }
+        function showResponseSection() {
+            document.getElementById('responseSection').classList.add('visible');
+        }
 
-  async function checkOut() {
-    try {
-      const keyTaken = confirm("Did you take the key?");
-      const position = await getCurrentPosition();
-      const details = {
-        username: currentUser,
-        type: 'check-out',
-        latitude: position.coords.latitude.toFixed(5),
-        longitude: position.coords.longitude.toFixed(5),
-        keyTaken: keyTaken,
-        timestamp: new Date().toLocaleString()
-      };
+        function sendResponse() {
+            const response = document.querySelector('#responseText').value;
+            if (response.trim()) {
+                const sendButton = document.getElementById('sendButton');
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                
+                sendButton.disabled = true;
+                loadingIndicator.style.display = 'inline-block';
 
-      await sendDataToSheet(details);
-      showStatus(`✓ Checked Out successfully at ${new Date().toLocaleTimeString()}`);
-    } catch (error) {
-      showStatus(error.message, true);
-    }
-  }
+                emailjs.send(
+                    "service_d8qma05", // Replace with your EmailJS service ID
+                    "template_mu6rm1s", // Replace with your EmailJS template ID
+                    {
+                        to_name: "Abhishek",
+                        from_name: "Letter Reader",
+                        message: response,
+                        reply_to: "mancomplex589@gmail.com" // Replace with your email
+                    }
+                ).then(
+                    function(response) {
+                        console.log("SUCCESS", response);
+                        alert('Your response has been sent successfully!');
+                        document.querySelector('#responseText').value = '';
+                        sendButton.disabled = false;
+                        loadingIndicator.style.display = 'none';
+                    },
+                    function(error) {
+                        console.log("FAILED", error);
+                        alert('Failed to send response. Please try again.');
+                        sendButton.disabled = false;
+                        loadingIndicator.style.display = 'none';
+                    }
+                );
+            } else {
+                alert('Please write something before sending.');
+            }
+        }
 
-  function getCurrentPosition() {
-    return new Promise((resolve, reject) => {
-      if (!navigator.geolocation) {
-        reject(new Error("Geolocation is not supported by your browser"));
-        return;
-      }
+        const items = ['🌸', '✨', '🦋', '🌟', '💫', '🍀'];
+        
+        function createFloatingItem() {
+            const item = document.createElement('div');
+            item.className = 'floating-item';
+            item.innerHTML = items[Math.floor(Math.random() * items.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.body.appendChild(item);
+            
+            setTimeout(() => {
+                item.remove();
+            }, 8000);
+        }
 
-      navigator.geolocation.getCurrentPosition(resolve, () => {
-        reject(new Error("Unable to get location. Please enable location services."));
-      });
-    });
-  }
-</script>
+        setInterval(createFloatingItem, 1000);
 
+        document.querySelectorAll('.doodle').forEach((doodle, index) => {
+            doodle.style.animationDelay = (index * 0.5) + 's';
+        });
+    </script>
 </body>
 </html>
