@@ -1,1 +1,272 @@
-Will be update soon 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday - From Your College Squad!</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap');
+    
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #000000;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #ffffff;
+    }
+
+    .entrance-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      z-index: 1000;
+      animation: fadeOut 2s ease-in-out 4s forwards;
+    }
+
+    .entrance-text {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      padding: 0 20px;
+    }
+
+    .entrance-text.line1 {
+      animation: slideUp 1s ease-out 0.5s forwards;
+      color: #FFD700;
+    }
+
+    .entrance-text.line2 {
+      animation: slideUp 1s ease-out 1.5s forwards;
+      color: #E0E0E0;
+    }
+
+    .entrance-text.line3 {
+      animation: slideUp 1s ease-out 2.5s forwards;
+      color: #FFD700;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 4.5s forwards;
+      background: linear-gradient(180deg, #000000, #1a1a1a);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #FFD700;
+      margin-bottom: 20px;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #E0E0E0;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 5s forwards;
+    }
+
+    .memory-card {
+      perspective: 1000px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .memory-card:nth-child(1) .memory-card-front {
+      background: linear-gradient(135deg, #FF416C, #FF4B2B);
+    }
+
+    .memory-card:nth-child(2) .memory-card-front {
+      background: linear-gradient(135deg, #4B79A1, #283E51);
+    }
+
+    .memory-card:nth-child(3) .memory-card-front {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+
+    .memory-card:nth-child(1) .memory-card-back {
+      background: linear-gradient(135deg, #FF4B2B, #FF416C);
+    }
+
+    .memory-card:nth-child(2) .memory-card-back {
+      background: linear-gradient(135deg, #283E51, #4B79A1);
+    }
+
+    .memory-card:nth-child(3) .memory-card-back {
+      background: linear-gradient(135deg, #38ef7d, #11998e);
+    }
+
+    .memory-card-inner {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      transform-style: preserve-3d;
+      transition: transform 0.8s;
+    }
+
+    .memory-card:hover .memory-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card-front,
+    .memory-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      box-sizing: border-box;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .memory-card-back {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+
+    .memory-card p {
+      text-align: center;
+      line-height: 1.6;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .memory-card {
+      transition: transform 0.3s ease;
+    }
+
+    .memory-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .sparkle {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: sparkle 1.5s infinite;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0); }
+      50% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="entrance-animation">
+    <h2 class="entrance-text line1">"From late-night study sessions to endless chai breaks..."</h2>
+    <h2 class="entrance-text line2">"From shared dreams to shared struggles..."</h2>
+    <h2 class="entrance-text line3">"You've made college life unforgettable!"</h2>
+  </div>
+
+  <div class="hero">
+    <h1>🎉 Happy Birthday, Partner in Crime! 🎂</h1>
+    <p class="quote">"Here's to the friend who made engineering survivable and dreams achievable!"</p>
+  </div>
+
+  <div class="memory-grid">
+    <div class="memory-card">
+      <div class="memory-card-inner">
+        <div class="memory-card-front">
+          <h2>From: Your Hostel Buddy</h2>
+          <p>"Remember those midnight maggi sessions and last-minute exam preparations? Here's to many more!"</p>
+        </div>
+        <div class="memory-card-back">
+          <p>"From copying assignments to sharing dreams of UPSC, we've come a long way! Keep shining, future IAS officer!"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="memory-card">
+      <div class="memory-card-inner">
+        <div class="memory-card-front">
+          <h2>From: Your Bench Partner</h2>
+          <p>"Thanks for being the one who kept me awake during those boring lectures! 😴✨"</p>
+        </div>
+        <div class="memory-card-back">
+          <p>"Your determination to crack UPSC while managing college life is truly inspiring. You've got this!"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="memory-card">
+      <div class="memory-card-inner">
+        <div class="memory-card-front">
+          <h2>From: Your 2AM Friend</h2>
+          <p>"To all our crazy canteen adventures and philosophical life discussions!"</p>
+        </div>
+        <div class="memory-card-back">
+          <p>"From engineering formulas to UPSC syllabus - you tackle everything with a smile. Happy Birthday!"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function createSparkle(e) {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.width = '4px';
+      sparkle.style.height = '4px';
+      sparkle.style.left = e.pageX + 'px';
+      sparkle.style.top = e.pageY + 'px';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1500);
+    }
+
+    document.addEventListener('mousemove', createSparkle);
+  </script>
+</body>
+</html>
